@@ -334,5 +334,11 @@ car cpy = [...data]; // clone
 
 ===============
 
+Task:
 
+Map function ==> HOF
+
+Input is products array
+
+output is name of products [iPhone, OnePlus, Onida]
 
