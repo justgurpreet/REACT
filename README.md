@@ -342,3 +342,133 @@ Input is products array
 
 output is name of products [iPhone, OnePlus, Onida]
 
+=======================
+
+Day 2
+
+Recap:
+JavaScript Context ==> Global creation Context, Execution Context, Functional Creation and Exceution Context
+
+JavaScript ==> Memory ==> RSS, Heap, Stack, Code Segment , Large Objects [ Garbage Collection]
+
+Event Loop and Callback [ Web Api ]
+
+Functional Style  of Programming [ HOF ]
+Function accepting function as argument ==> filter, forEach
+Task ==> map HOF
+
+Function returning a Function ==> Closure
+=> Cache
+
+ES 6 Features:
+1) Arrow
+2) Destructrucing
+3) Spread operators
+4) Clone
+5) Promise
+6) Async and Await
+7) ES 6 module System / class
+
+https://rxmarbles.com/
+
+=================================================
+
+NodeJS
+
+platform with V8 javascript engine and libuv libraries
+
+* Use to build APIs [ RESTful, GraphQL ]
+* Realtime application [ Chatbot]
+* Streaming [ OTT ]
+* platform for transpile/ Transcompiler your code; bundling, testing, Code analyis for building client side web application [ Angular, React, Vue, Backbone, .. ]
+	Angular ==> TypeScript / DART
+	React ==> JSX / TSX
+ 
+ 	a.js, b.js, c.js
+
+ 	index.html
+ 		<script src="c.js"></script>
+ 		<script src="b.js"></script>
+ 		<script src="a.js"></script>
+
+ bundle.js
+ 	<script src="bundle.js"></script>
+
+=============
+
+NodeJS JavaScript Build tools
+1) Grunt
+Grunt is a JavaScript task runner, a tool used to automatically perform frequent tasks such as minification, compilation, unit testing, and linting.
+2) Gulp
+3) Webpack
+
+===
+
+NPM / YARN
+
+node package manager
+* Manage dependecies [ download modules from repositories] ==> Maven / Gradle, PIP
+* Run Scripts
+* Publish
+
+==
+Steps:
+1) npm init -y
+
+creates package.json [ similar to pom.xml ]
+	==> place where we configure 
+	1) "dependecies" ==> modules required for production stage
+	2) "devDependencies" ==> modules required for development stage [ testing / linting / compile]
+
+
+	when we bundle only "dependecies" are included in final bundle to be taken to server for execution
+
+
+npm i webpack webpack-dev-server webpack-cli -D
+
+"devDependencies": {
+    "webpack": "^5.64.3",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.5.0"
+  }
+
+Other team members:
+
+npm install  
+
+checks package.json and downloads all the dependecnies
+
+
+npm i html-webpack-plugin -D
+
+HTML Webpack Plugin
+Plugin that simplifies creation of HTML files to serve your bundles
+
+
+index.html
+
+<html>
+<body>
+	contents!!!
+</body>
+</html>
+
+"html-webpack-plugin": "^5.5.0"
+
+^any version greater than
+
+~5.5.0 
+
+any version where major is "5";
+minor and patch can be any latest
+
+"html-webpack-plugin": "5.5.0"
+exact version
+
+==========
+
+
+
+
+
+
