@@ -465,10 +465,81 @@ minor and patch can be any latest
 "html-webpack-plugin": "5.5.0"
 exact version
 
-==========
+====================
+
+Module System:
+
+1) Plain Vanilla MS
+IIFE
+()();
+
+2) CommonJS module system [ NodeJS default]
+
+lib.js
+
+module.exports add = function () {
+}
+
+module.exports sub = function() {
+
+}
+
+other.js
+
+let add = require('lib').add;
+
+============
+
+npm i css-loader style-loader -D
+
+
+@import 'styles.css'
+
+<style>
+
+</style>
 
 
 
+==
+
+src/styles.css
+body {
+    background-color: cadetblue;
+    color: white;
+}
 
 
+===
 
+index.js
+
+import "./styles.css";
+
+console.log("Hello World Webpack!!!");
+
+====================
+
+BABEL
+
+Babel is a free and open-source JavaScript transcompiler that is mainly used to convert ECMAScript 2015+ code into a backwards compatible version of JavaScript that can be run by older JavaScript engines.
+
+TRACUER
+
+===
+
+TypeScript ==> TSC
+
+
+npm i @babel/core babel-loader @babel/preset-env -D
+
+===
+
+Create chunks:
+
+node_modules ==> seperate chunk
+mycode ==> seperate chunk
+
+===========
+
+REACT
