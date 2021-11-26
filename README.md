@@ -735,4 +735,42 @@ ReactDOM.render(<ProductList title="Product List"  products={data} /> , document
 
 ============
 
-Task
+Class Component
+
+Earlier:
+
+npm i -g create-react-app
+create-react-app customerapp
+
+Latest:
+npx create-react-app customerapp
+
+==================
+
+
+class Welcome extends React.Component {
+  constructor(props) {
+    super(props);
+    // init
+  }
+  // JSX
+  render() {
+    let {title, place } = this.props;
+    return <div>
+      {title} {place}
+      </div>
+  }
+} 
+
+ReactDOM.render(<Welcome title="Welcome to React" place="Virtual"/> , document.getElementById("app"));
+
+===
+
+State and behaviour of a model ==> Class Component
+
+Model ==> product, customer, cart, ...
+
+Behaviour ==> delete product, add product, login ,...
+
+
+
