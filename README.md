@@ -542,4 +542,197 @@ mycode ==> seperate chunk
 
 ===========
 
+Webpack ==> JavaScript Build tool
+==> CSS-loader [ import './styles.css' ], Style-loader [ <style></style>]
+==> Babel-loader, @babel/babel-preset, @babel/core [ ES6+ to downward compatilbility]
+==> HtmlWebpackPlugin [ bundles placed into html]
+==> Webpack-dev-server ==> light http server with push enabled
+==> webpack --mode devlopment / production
+
+In production mode [ minify and uglify]
+
+==============================================
+
 REACT
+
+Data (State of resource) ==> Presentation
+
+Server side rendering:
+to clients only presentation pages are served [ pdf / html / image]
+Templates
+Java: JSP/ Thymeleaf
+PHP
+JS: Jade / Pug/ HandleBars / Mustache / jQuery
+
+Client side Rendering:
+Allows client server seperation
+Server sends the state of resource to clients;
+each client can render the data
+Mobile clients [ Android/ Swift]
+Web clients
+Standalone clients
+
+Web application:
+JS has templates for rendering on client side
+* HandleBars / Mustache / jQuery
+
+Single Page Applications [ index.html ]
+only JSON / XML is what is sent as payload between client and server
+
+* Routing
+	http://adobe.com/products
+	http://adobe.com/clients
+	http://adobe.com/locations
+
+	http://amazon.com/products/mobile/iphone
+	http://amazon.com/products/mobile/OnePlus
+
+	http://amazon.com/products/tv/sony
+
+==> SEO
+==> Bookmark
+==> Navigation between views and not pages
+==> Security
+http://amazon.com/cart
+
+* binding [ one way or two way]
+data ==> placeholders 
+
+* Controlling partial rendering
+* Dependency Injection and lazy loading of modules
+
+Model View Controller
+Model ==> data
+Controller 
+
+View <==> Controller <==> Model
+
+1) Backbone ==> MVC framework
+2) Angular ==> MVC framework
+3) React ==> View Library
+
+============================
+React Playboard:
+
+codepen.io
+
+JS libraries:
+https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js
+
+https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js
+
+JS Preprocessor:
+Babel
+
+===
+DOM elements: html, body, h1, table, ..
+<tr></tr>
+
+<div id="app"></div>
+
+let Welcome = React.createElement("h1", {style: {'color': 'blue'}}, "Welcome to React");
+
+
+Reconcillation ==> React Element is rendered to VDOM and DOM [ JSON object]
+ReactDOM.render(Welcome, document.getElementById("app"));
+
+==============
+
+functional and class components
+
+ 
+function Welcome() {
+  return <div>
+        Hello!!!
+    </div>
+}
+
+console.log(Welcome())
+ReactDOM.render(<Welcome />, document.getElementById("app"));
+
+======
+
+Props
+==> data passed to an Component
+like attributes to Elements
+<img src="logo.png" width="100" height="100" />
+
+===
+
+// React Component returns JSX
+function Welcome(props) {
+  return <div>
+        <h1> {props.title} </h1>
+        <h2> {props.place} </h2>
+    </div>
+}
+
+// console.log(Welcome())
+ReactDOM.render(<Welcome title="Welcome to React"  place="Virtual"/>, document.getElementById("app"));
+
+==
+JSX:
+function Welcome({title, place}) {
+  return <div>
+        <h1> {title} </h1>
+        <h2> {place} </h2>
+    </div>
+}
+
+need to have one root element
+
+==========
+
+function add(x, y) {
+	return x + y
+}
+
+add(4,5)
+
+function add(x, y) {
+	return
+		x + y;
+}
+
+add(4,5);
+AST
+
+function Welcome({title, place}) {
+  return (
+		  <div>
+		        <h1> {title} </h1>
+		        <h2> {place} </h2>
+		  </div>
+  )
+}
+
+=========
+
+ var data = [
+    {"id":1,"name":"iPhone","price":124447.44,"category" : "mobile"},
+    {"id":2,"name":"Onida","price":4444.44,"category" : "tv"},
+    {"id":3,"name":"OnePlus 6","price":98444.44,"category" : "mobile"},
+    {"id":4,"name":"HDMI connector","price":2444.00,"category" : "computer"},
+      {"id":5,"name":"Samsung","price":68000.00,"category" : "tv"}];
+
+function ProductList({title, products}) {
+  return (
+    <div>
+      <h1>{title}</h1>
+      <ul>
+      {
+        products.map(p => <Product product ={p}/>)
+      }
+    </ul>
+    </div>
+  )
+}
+
+function Product({product}) {
+	return <li> {product.name} {product.price} </li>
+}
+ReactDOM.render(<ProductList title="Product List"  products={data} /> , document.getElementById("app"));
+
+============
+
+Task
