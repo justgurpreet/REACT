@@ -961,7 +961,200 @@ Code Coverage:
 
 npm test -- --coverage
 
+====
 
 
+
+C:\Users\banup\Desktop\Adobe_web\REACT_24_11\REACT\customerapp>npm i cypress -D
+
+
+cypress.config.json
+{
+    "testFiles" : "**/*.spec.js",
+    "viewportWidth" : 500,
+    "viewportHeight" : 500,
+    "baseUrl" : "http://localhost:3000",
+    "integrationFolder" : "e2e"
+}
+
+
+
+ "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+     "cypress": "cypress run",
+    "open" : "cypress open"
+  },
+
+npm start
+
+npm run open
+
+===================
+
+npx create-react-app phoneapp
+
+========================================================
+
+State and Props ==> immutable
+
+this.setState({..})
+
+==================
+
+WebVitals:
+
+First Contentful Paint (FCP)
+
+
+React Context:
+
+Context provides a way to pass data through the component tree without having to pass props down manually at every level
+
+
+================
+
+var PersonContext = React.createContext();
+
+class PersonProvider extends React.Component {
+  state = {
+    name : 'Smith',
+    email : "",
+     update : this.update.bind(this)
+  };
+  
+  update(email) {
+    this.setState({
+        "email": email
+    });
+   }
+  
+  render() {
+    return <PersonContext.Provider value={this.state}>
+        {this.props.children}
+      </PersonContext.Provider>
+  }
+}
+
+class App extends React.Component{
+  render() {
+    return <PersonProvider>
+        <First />
+       </PersonProvider>
+  }
+}
+
+class First extends React.Component {
+  render() {
+     return <Second/>
+  }
+}
+
+class Second extends React.Component {
+  render() {
+    return <PersonContext.Consumer>
+            {
+              value => { 
+                return <React.Fragment>
+                  <h1> {value.name} {value.email}</h1>  
+                  <button onClick={() => value.update('smith@adobe.com')}>Change</button>
+                  </React.Fragment>
+              }
+      }
+      </PersonContext.Consumer>
+  }
+}
+
+ReactDOM.render(<App/>, document.getElementById("app"))
+
+
+=========
+
+function App() {
+	return (
+		<div>
+				<Header />
+				{props.children}
+		</div>
+	)
+}
+
+
+
+
+<App>
+	<A />
+	<B />
+</App>
+
+
+
+
+
+<App>
+	<C />
+	<D />
+	<E />
+</App>
+
+
+let CustomerContext = React.createContext();
+
+class First extends React.Component {
+  render() {
+     return (
+     <CustomerContext.Provider value="Hello World">
+    	 <Second/>
+   	</CustomerContext.Provider>
+     )
+  }
+}
+
+
+Second can be a consumer to "PersonContext" and "CustomerContext"
+
+
+class Second extends React.Component {
+  render() {
+    return <div>
+    	<PersonContext.Consumer>
+            {
+              value => { 
+                return <React.Fragment>
+                  <h1> {value.name} {value.email}</h1>  
+                  <button onClick={() => value.update('smith@adobe.com')}>Change</button>
+                  </React.Fragment>
+              }
+      }
+      </PersonContext.Consumer>
+
+      <CustomerContext.Consumer>
+      	value => {
+      		console.log(value); // Hello World
+      	}
+      </CustomerContext.Consumer>
+      </div>
+  }
+}
+
+==========================
+
+JavaScript
+RSS ==> Resident Set Size
+Stack
+Heap ==> Young Generation ==> Old Generation
+
+Redux ==>
+
+===
+
+React Context
+React Router Dom
+Lazy Initialization
+API call with component life cycle
+
+====================
 
 
