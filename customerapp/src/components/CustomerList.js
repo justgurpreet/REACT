@@ -37,23 +37,40 @@ export default class CustomerList extends Component {
         ],
     };
 
+    constructor(props) {
+        super(props);
+        this.state.complete = this.state.customers; // copy of customers
+        this.deleteCustomer = this.deleteCustomer.bind(this);
+    }
     render() {
         return (
             <div>
-                <Filter />
+                <Filter filterEvent = {this.filterCustomers.bind(this)}/>
                 {
                    this.state.customers.map(c =>  <CustomerRow 
+                        key={c.id}
                         customer={c} 
-                        delEvent={(id) => this.deleteCustomer(id)}/>) 
+                        delEvent={this.deleteCustomer}/>) 
                 }
             </div>
         )
     }
 
-    deleteCustomer(id) {
-        let custs = this.state.customers.filter(c => c.id != id);
+    filterCustomers(txt) {
+        let custs = this.state.complete.filter(c => c.lastName.toLowerCase().indexOf(txt.toLowerCase()) >= 0);
+        
         this.setState({
-            customers: custs
+                customers: custs
         });
     }
+    
+    deleteCustomer(id) {
+        let custs = this.state.customers.filter(c => c.id !== id);
+        // Async functions
+        this.setState({
+            customers: custs
+        }, () => console. log("deleted!!!"));
+        
+    }
+ 
 }

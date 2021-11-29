@@ -773,4 +773,195 @@ Model ==> product, customer, cart, ...
 Behaviour ==> delete product, add product, login ,...
 
 
+=============================
+
+Day 4
+
+onClick
+onChange
+onMouseOver
+onKeypress
+
+
+state = {
+	"a" : ..,
+	"b" : ..
+	"customers" : ...
+
+}
+
+
+ this.setState({
+            customers: custs
+ }, () => console. log("deleted!!!"));
+
+ =====
+
+ Binding events:
+
+ 1) using Arrow operator
+
+  delEvent={(id) => this.deleteCustomer(id)}/>) 
+
+  deleteCustomer(id) {
+        let custs = this.state.customers.filter(c => c.id != id);
+         this.setState({
+            customers: custs
+        }, () => console. log("deleted!!!"));
+   }
+
+ 2) without arrow using function syntax
+
+ Wrong Syntax: customer is getting delted on render
+  delEvent={this.deleteCustomer(c.id)}/>) 
+
+ 3) using function reference
+    delEvent={this.deleteCustomer}/>)
+
+Cannot read properties of undefined (reading 'customers')
+functions will have its own context;
+"this" is not referencing to "CutomerList"
+
+
+4) binding function context to class
+
+  delEvent={this.deleteCustomer.bind(this)}/>) 
+
+
+var p = {
+	"name" : "Test",
+	doTask: function () {
+		console.log(this.name);
+	}
+}
+
+p.doTask(); // Test
+
+ver ref = p.doTask; // gets function definition but context is lost
+
+ref(); // within doTask context is not "p"
+
+var nref = p.doTask.bind(p);
+
+
+
+
+5) binding in constructor
+
+ constructor(props) {
+        super(props);
+        this.deleteCustomer = this.deleteCustomer.bind(this);
+    }
+    render() {
+        return (
+            <div>
+                <Filter />
+                {
+                   this.state.customers.map(c =>  <CustomerRow 
+                        customer={c} 
+                        delEvent={this.deleteCustomer}/>) 
+                }
+            </div>
+        )
+    }
+
+ 6) using arrow function
+ delEvent={this.deleteCustomer}/>)  withput bind works
+
+ deleteCustomer = (id) => {
+        let custs = this.state.customers.filter(c => c.id != id);
+        // Async functions
+        this.setState({
+            customers: custs
+        }, () => console. log("deleted!!!"));
+        
+    }
+
+ note: Arrow functions will "this" as enclosing context; doesn;t have its own context
+
+=========
+key property of list:
+
+<CustomerRow 
+                        key={c.id}
+                        customer={c} 
+                        delEvent={this.deleteCustomer}/>
+
+=============
+
+https://notepad.pw/x39rv72p
+
+============================================
+
+React Testing Library:
+ "@testing-library/jest-dom": "^5.11.4",
+ "@testing-library/react": "^11.1.0",
+ "@testing-library/user-event": "^12.1.10",
+
+ Unit Testing and Integration Testing JS testing libraries:
+ 1) Jasmine
+ 2) Mocha
+ 3) JEST
+
+
+Angular Test Bed is builton Jasmine
+React testing library is built on JEST
+ExpressJs and HAPI frameworks ==> most of them prefer Mocha
+
+jest-dom ==> Additional apis to test React Component
+
+===
+AAA ==> Assemble Action Assert
+
+getByXXX() ==> throws exception if not found
+
+queryByXXX() ==> returns null
+
+findByXXX() ==> Async components
+
+<button ... />
+
+getByRoleName("button")
+getByRoleName("input")
+
+<h1>Welcome to React </h1>
+
+getByText(/react/i);
+
+ <input type="text" 
+            placeholder="search by name" 
+            onChange={(evt) => props.filterEvent(evt.target.value)}/>
+
+ getByPlaceHolderText("search by name");
+
+
+ document.querySelector('input[placeholder="search by name"]')
+
+ document.getElementById("#btn")
+
+
+// test suite
+ describe("tesing customer compoenents", () => {
+ 	// test spec
+ 	it("filter customer", () => {
+
+ 	});
+
+ 		// test spec
+ 	test("delete customer", () => {
+
+ 	});
+
+ })
+
+TCER
+
+=============
+Code Coverage:
+
+npm test -- --coverage
+
+
+
+
 
