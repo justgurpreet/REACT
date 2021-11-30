@@ -1243,5 +1243,60 @@ from share.zip
 3) copy Button.js into components
 4) overwrite "Navbar.js"
 
+==================================================
+
+styled-components
+
+bootstrap is a CSS Framework for Responsive Web Design
+Hyprelink:
+<a href="somepage" /> for server side rendering
+
+Client side Routing
+
+import {Link} from 'react-router-dom';
+<Link to="/" className="nav-link">   
+                    Products
+</Link>
+
+  <Link to="/cart" className="ml-auto"> 
+  	//
+	</Link>
+
+if(condition) {
+	import('./components/Cart').then( cart => {
+		...
+	});
+}
+
+===
+Task:
+Complete the applicaiton:
+1) Context.js
+		increment()
+		decrement()
+
+==============
+
+Making API call from react
+1) request
+2) fetch
+3) axios
+4) jQuery
+
+==============
+
+json-placeholder
+
+npx json-server --watch data.json --port 1234
+
+================
+
+
+
+
+
+
+
+
 
 
