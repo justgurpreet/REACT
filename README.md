@@ -1157,8 +1157,91 @@ API call with component life cycle
 
 ====================
 
+Day 5
+
+$ npx create-react-app phoneapp
 phoneapp> npm i bootstrap axios react-router-dom styled-components
 
+7 components
+1) ProductList
+2) Product
+3) Cart
+4) CartList
+5) Default
+6) Detail
+7) Navbar
+
+=====
+
+React.Fragment
+
+A common pattern in React is for a component to return multiple elements. 
+Fragments let you group a list of children without adding extra nodes to the DOM.
+
+return (
+	<div>
+		...
+		..
+	</div>
+)
+
+return (
+	<React.Fragment>
+		...
+		..
+	</React.Fragment>
+)
+
+or
+
+return (
+	<>
+		...
+		..
+	</>
+)
+
+====
+
+StrictMode is a tool for highlighting potential problems in an application. Like Fragment , StrictMode does not render any visible UI.
+
+<React.StrictMode>
+</React.StrictMode>
+
+====
+
+https://notepad.pw/r92cz3fv
+
+Router ==> 
+* Different URIs display different views in SPA
+* Bookmark an URI
+* Navigate between Views
+* Easy to protect certain views
+* code Splitting
+
+=================
+npm i source-map-explorer
+
+"scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "analyze": "source-map-explorer 'build/static/js/*.js"
+  }
+
+
+npm run build
+npm run analyze
+
+====
+
+from share.zip
+
+1) copy data.js into "src"
+2) copy "img" folder into "public"
+3) copy Button.js into components
+4) overwrite "Navbar.js"
 
 
 
