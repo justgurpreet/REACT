@@ -1157,4 +1157,8 @@ API call with component life cycle
 
 ====================
 
+phoneapp> npm i bootstrap axios react-router-dom styled-components
+
+
+
 
