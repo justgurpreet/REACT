@@ -1626,6 +1626,255 @@ class Parent extends React.Component {
 
 ReactDOM.render(<Parent/>, document.getElementById("app"));
 
+=================================================
+
+function checkChanges(nextProps, nextState) {
+
+}
 
 
+let MemoChild = React.memo(Child, checkChanges); 
+
+
+=============
+
+React Hooks
+Hooks are a new addition in React 16.8. 
+They let you use state and other React features without writing a class.
+
+Class Component:
+1) state
+2) behaviour
+3) lifecycle methods
+
+extends Component {
+
+}
+ 
+functional components are light-weight
+
+===============================================
+
+React Hooks:
+1) useState
+
+function App() {
+	let [count, setCount] = React.useState(0);
+	let [user, setUser] = React.useState("");
+
+	return (
+			<div>
+				Count {count} <br />
+				<button onClick={() => setCount(count + 1)}>Click </button>
+			</div>
+	)
+}
+
+
+same as
+class App extends React.Component {
+	state = {
+		count: 0,
+		user : ""
+	}
+
+	setCount(cnt) {
+		this.setState({
+			count: cnt
+	})
+	}
+
+	setUser(name) {
+		this.setState({
+			user: name
+		})
+	}
+}
+
+
+2) useReducer
+	=> if state is complex object [ json / nested object ]
+	=> Conditional mutation
+
+	let initialState  = {count : 0};
+
+	let countReducer = (state, action) => {
+		switch(action.type) {
+			case "DECREMENT" : return { count : state.count -1 };
+			case "INCREMENT" : return {count : state.count + action.payload};
+			default: return state;
+		}
+	}
+
+	function App() {
+		let [state, dispatch] = React.useReducer(countReducer, initialState);
+
+		function handleIncrement() {
+			let action = {"type": "INCREMENT", payload: 10};
+			dispatch(action);
+		}
+
+		return (
+			<div>
+				Count {state.count} <br />
+				<button onClick={handleIncrement}>Click </button>
+			</div>
+	)
+	}
+
+==
+action ==> DEPOSIT, WITHDRAW
+action ==> ADD_TO_CART, REMOVE_FROM_CART, REMOVE_ALL
+
+3) useContext()
+
+Class Component using Context Consumer:
+
+
+export default class Cart extends Component {
+    render() {
+        return (
+            <div className="container">
+                <ProductConsumer>
+                    {
+                        value => {
+                               return value.cart.map(p => <CartList key={p.id} product={p}/>)
+                        		}
+                        }
+                    }
+                </ProductConsumer>
+            </div>
+        )
+    }
+}
+
+===
+Context.js
+
+const  ProductContext = React.createContext();
+
+export {ProductContext, ProductProvider, ProductConsumer};
+
+export default function Cart() {
+	let productContextConsumer = React.useContext(ProductContext); // get Consumer
+
+	return <h1> {productContextConsumer.cart.map(p => <CartList product={p} key = {p.id} />)} </h1>
+}
+
+
+===
+
+function Example() {
+	let personContext = React.useContext(PersonContext);
+	let productContext = React.useContext(ProductContext);
+
+	return <h1> {personContext.name} {productContext.total} </h1>
+
+}
+
+=====
+
+let SampleContext = React.createContext({count:10});
+
+function App() {
+	let SampleConsumer = React.useContext(SampleContext);
+	..
+	{SampleConsumer.count}
+}
+
+=======
+
+4) useParams() ==> Hook by react-router-dom
+
+check Details.js
+    let {id} = useParams();
+
+
+5) useEffect()
+hook to simulate lifecycle methods available in class component
+
+componentDidMount() < == once when initial mounting
+componentDidUpdate() <== whenever state or props change 
+
+
+function App() {
+	let [count, setCount] = React.useState(0);
+	let [user, setUser] = React.useState("");
+
+	// componentDidMount
+	React.useEffect(() => {
+			console.log("called effect 1", count);
+	}, []);
+
+	// componentDidUpdate
+	React.useEffect(() => {
+			console.log("called effect 2", count);
+	});
+
+	// called when user changes
+	React.useEffect(() => {
+			console.log("called effect 3", count);
+	}, [user]);
+
+	function handleIncrement() {
+		setCount(count + 1);
+	}
+
+	return (
+		<div>
+				Count {count} <br />
+				<button onClick={handleIncrement}>Click</button>
+		</div>
+	)
+}
+
+ReactDOM.render(<App/>, document.getElementById("app"));
+
+===
+
+
+
+
+function ParentComponent() {
+	const [age, setAge] = React.useState(25)
+	const [salary, setSalary] = React.useState(50000)
+
+	 const incrementAge = () => {
+		setAge(age + 1)
+	};
+
+	const incrementSalary = () => {
+   		setSalary(salary + 1000)
+	}
+  
+	return (
+		<div>
+			<MemoTitle />
+			<MemoCount text="Age" count={age} />
+			<MemoButton handleClick={incrementAge}>Increment Age</MemoButton>
+			<MemoCount text="Salary" count={salary} />
+			<MemoButton handleClick={incrementSalary}>Increment Salary</MemoButton>
+		</div>
+	)
+}
+
+6) useCallback
+useCallback will return a memoized version of the callback that only changes if one of the dependencies has changed.
+
+
+ const incrementAge = React.useCallback(() => {
+		setAge(age + 1)
+	}, [age]);
+
+	const incrementSalary = React.useCallback(() => {
+   		setSalary(salary + 1000)
+	}, [salary]);
+
+7) useMemo() to cache variable ==> not a HOC
+
+
+========
+State Management with Redux 
+
+==========================
 
