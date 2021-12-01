@@ -1436,14 +1436,195 @@ class App extends React.Component {
 
 ReactDOM.render(<App/>, document.getElementById("app"));
 
+======================
+
+High Order Components [ HOC]
+HOF ==> function accept function and/or returns function
+
+HOC
+1) to introduce new props and behaviour for Component
+2) conditionally return component [ HourGlass or Component]
+
+Both these components needs a counter [ times cliekd on div; times hovered on img]
+
+class DivComponent extends React.Component {
+	render() {
+		return <div>
+						count { this.props.count} <br />
+						<button type="button" onClick={() =>this.props.increment()} />
+			</div>
+	}
+}
+
+class ImgComponent extends React.Component {
+	//similar code but onHover= {...}
+}
+
+HOC takes a component and returns EnhancedComponent with additional props
+
+const withCounter = (WrappedComponent) => {
+	return class extends React.Component {
+		constructor(props) {
+			super(props);
+			this.state = {
+				count : 0
+			}
+		}
+
+		increment = () => {
+			this.setState({
+				count: this.state.count + 1
+				})
+		}
+
+		render() {
+			return <WrappedComponent count={this.state.count} increment={this.increment} />
+		}
+	}
+}
+
+	
+const DivWithCounter = withCounter(DivComponent);
+
+<DivWithCounter />
+
+===========
+
+Parent Child re-render issues:
+
+class Child extends React.Component {
+  render() {
+    console.log("child renders!!");
+    return <h1> Child : { this.props.name} </h1>
+  }
+}
+class Parent extends React.Component {
+  state = {
+    count : 0,
+    name : "Banu"
+  }
+  increment = () => {
+			this.setState({
+				count: this.state.count + 1
+				})
+	}
+
+   render() {
+     console.log("Parent renders!!!")
+    return (
+      <>
+      Count : {this.state.count} <br />
+       Name: {this.state.name} <br />
+        <Child name={this.state.name} /> <br />
+      <button onClick={this.increment}> Click </button>
+        </>
+    )
+  }
+  
+}
+
+
+ReactDOM.render(<Parent/>, document.getElementById("app"));
+
+
+===
+
+shouldComponentUpdate() to prevent re-render
+class Child extends React.Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return JSON.stringify(this.props) !== JSON.stringify(nextProps);
+  }
+  render() {
+    console.log("child renders!!");
+    return <h1> Child : { this.props.name} </h1>
+  }
+}
+
+
+===
+Use PureComponent if props passed is primitive data and not complex objects [ nested object]
+class Child extends React.PureComponent {
+   render() {
+    console.log("child renders!!");
+    return <h1> Child : { this.props.name} </h1>
+  }
+}
+
+==============
+
+If functional components is used instead of Class Component
+
+function Child(props) {
+   console.log("child renders!!");
+   return <h1> Child : {props.name} </h1>
+}
+
+class Parent extends React.Component {
+  state = {
+    count : 0,
+    name : "Banu"
+  }
+  increment = () => {
+			this.setState({
+				count: this.state.count + 1
+				})
+	}
+
+   render() {
+     console.log("Parent renders!!!")
+    return (
+      <>
+      Count : {this.state.count} <br />
+       Name: {this.state.name} <br />
+       <Child name={this.state.name} /> <br />
+      <button onClick={this.increment}> Click </button>
+        </>
+    )
+  }
+  
+}
+
+
+ReactDOM.render(<Parent/>, document.getElementById("app"));
 
 
 
+Memoization using React.memo() ==> HOC
+
+function Child(props) {
+   console.log("child renders!!");
+   return <h1> Child : {props.name} </h1>
+}
+
+let MemoChild = React.memo(Child); // HOC
+
+class Parent extends React.Component {
+  state = {
+    count : 0,
+    name : "Banu"
+  }
+  increment = () => {
+			this.setState({
+				count: this.state.count + 1
+				})
+	}
+
+   render() {
+     console.log("Parent renders!!!")
+    return (
+      <>
+      Count : {this.state.count} <br />
+       Name: {this.state.name} <br />
+       <MemoChild name={this.state.name} /> <br />
+      <button onClick={this.increment}> Click </button>
+        </>
+    )
+  }
+  
+}
 
 
-
-
-
+ReactDOM.render(<Parent/>, document.getElementById("app"));
 
 
 
