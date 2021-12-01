@@ -1292,6 +1292,154 @@ npx json-server --watch data.json --port 1234
 ================
 
 
+Day 6
+
+Recap:
+	Context ==> helps storing information shared by  nth level components; avoids passing props thro intermediary components
+	State and Behaviour are present in Context easy to debug.
+	Can easily make all components as functional components 
+
+	react-router-dom BrowserRouter, Route, Link [ instead of <a href >]
+
+	styled-components, bootstrap, font-awesome
+
+	increment() and decrement()
+
+	increment = (id) => {
+			let prds = this.state.cart.filter(p => p.id === id) [0];
+			prds.count++;
+			prds.total = prds.price * prds.count;
+			this.setState({
+				cart: this.state.cart
+			})
+	}
+
+=================================================
+
+Errorboundary
+	==> componentDidCatch(error, errorInfo) {}
+	==> getDerivedStateFromError(error) {}
+
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+     return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+   console.log(error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h1>Something went wrong.</h1>;
+    }
+
+    return this.props.children; 
+  }
+}
+
+<ErrorBoundary>
+	<A />
+	<B />
+	<C />
+</ErrorBoundary>
+<D/>
+
+<ErrorBoundary>
+	<E />
+	<F />
+</ErrorBoundary>
+
+use try-catch within react component for event handling
+
+==================
+
+
+React Reference
+
+class App extends React.Component {
+  emailRef = React.createRef(); // reference
+  render() {
+    return (
+      <div>
+      	<input type="text" ref={this.emailRef} />
+      	<button onClick={() => this.doTask()}> Click </button>
+      </div>
+    )
+  }
+  
+  doTask() {
+    console.log("-->", this.emailRef.current.value);
+    this.emailRef.current.focus();
+  }
+}
+
+
+ReactDOM.render(<App/>, document.getElementById("app"));
+
+===
+
+Other options
+
+<input type="text" onChange={(e)=> setName(e.target.value) }/>
+<input type="text" onChange={(e)=> setEmail(e.target.value) }/>
+
+setName(txt) {
+	this.setState( {
+		name: txt
+	})
+}
+
+setEmail(txt) {
+	this.setState( {
+		email: txt
+	})
+}
+
+
+<input type="text" ref={input => this.emailRef = input} />
+
+===============
+
+Forward Reference ==> useful when you use 3rd party components [ KendoUI, PrimeReact, Adobe Spectrum, ..]
+
+Most of these 3rd party components attaches the refernces passed by paretn to its internal state/behaviour
+
+
+const EmailInput = React.forwardRef( (props, ref) => {
+    return <input type="text" ref={ref} {...props} />
+});
+
+class App extends React.Component {
+  emailRef = React.createRef(); // reference
+  render() {
+    return (
+      <>
+      <EmailInput ref={this.emailRef} size="10" page="1" />
+      <button onClick={() => this.doTask()}> Click </button>
+        </>
+    )
+  }
+  
+  doTask() {
+    console.log("-->", this.emailRef.current.value);
+    this.emailRef.current.focus();
+  }
+}
+
+
+ReactDOM.render(<App/>, document.getElementById("app"));
+
+
+
+
+
 
 
 
