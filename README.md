@@ -1967,6 +1967,9 @@ Redux [ state mangement ] + Context [ read state from redux ans pass it to compo
 
 ============================
 
+index.js pending
+
+ 
 
 
 

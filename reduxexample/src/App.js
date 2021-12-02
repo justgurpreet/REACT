@@ -27,7 +27,7 @@ class App extends React.Component {
   }
 
   render() {
-    <div>
+    return <div>
       <h1>Contact Names</h1>
       <form onSubmit={this.handleSubmit}>
          <input type="text" ref={this.nameRef} /> 
@@ -36,7 +36,7 @@ class App extends React.Component {
       <ul>
         {
           this.props.contacts.map( (contact, i) => {
-            <ContactView 
+           return <ContactView 
               contact={contact} 
               index={i} 
               deleteContact={(e,index) => this.deleteContact(e,index)} />
