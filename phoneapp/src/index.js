@@ -5,6 +5,11 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ProductProvider } from './components/Context';
 
+import reportWebVitals from './reportWebVitals';
+
+
+
+
 ReactDOM.render(
   <React.StrictMode>
     <ProductProvider>
@@ -14,3 +19,6 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
+reportWebVitals(console.log);
+
+// reportWebVitals(console.log);

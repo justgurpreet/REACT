@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Profiler } from 'react'
 import {ProductConsumer} from './Context'
 import Product from './Product';
+
 export default class ProductList extends Component {
     render() {
         return (

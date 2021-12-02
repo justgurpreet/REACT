@@ -1698,6 +1698,7 @@ class App extends React.Component {
 
 	let initialState  = {count : 0};
 
+
 	let countReducer = (state, action) => {
 		switch(action.type) {
 			case "DECREMENT" : return { count : state.count -1 };
@@ -1877,4 +1878,96 @@ useCallback will return a memoized version of the callback that only changes if 
 State Management with Redux 
 
 ==========================
+
+Day 7
+
+npx create-react-app reduxexample
+
+reduxexample> npm i redux react-redux
+
+
+Day 6 Recap:
+* HOC ==> introduce new props to components; Conditionally returns Component
+
+	render() {
+		if(this.props.isLoading) {
+			return <HourGlass /> 
+		} else {
+			return <WrappedComponent />
+		}
+	}
+
+* shouldComponentUpdate() , PureComponent
+
+* React Hooks ==> only for functional component
+1) useState()
+2) useReducer() ==> state is complex, conditinonally mutate the state
+3) useEffect()
+4) useCallback()
+5) useContext()
+6) useParams()
+7) useMemo()
+
+
+React.useEffect(() => {
+
+});
+
+React.useEffect(() => {
+
+}, []);
+
+
+React.useEffect(() => {
+
+}, [a]);
+
+React.useEffect(() => {
+
+}, [a, b]);
+
+======
+
+
+Day 7
+
+State Management in React application
+
+Redux Characters:
+1) Action 
+
+	{
+		type: "type_of_action",
+		payload
+	}
+
+2) ActionCreator
+	==> take data from view and return appropriate action object
+
+3) store ==> central place for state ==> Redux has a single store
+	store is linked to reducers
+
+4) Reducers ==> take data from store, action from actionCreator,
+			copies state, mutate and return back the changes to store, where store updates
+			we can have many reducers.
+			RootReducer is used to combine all reducers
+			store we will link RootReducer
+
+			store <==> RootReducer <=> child reducer
+
+5) View Layer Binding connect() from 'react-redux'
+		state of redux ==> pass it as props to component
+		 dispatch [ to invoke reducers] ==> 	pass it as props to component
+
+6) Provider ==> same as Context provider to link store to component react-redux
+
+=======
+
+Redux [ state mangement ] + Context [ read state from redux ans pass it to components; prevent passing props thro intermediate components]
+
+============================
+
+
+
+
 

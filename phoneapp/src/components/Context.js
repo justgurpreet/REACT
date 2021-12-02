@@ -1,6 +1,7 @@
 // import {storeProducts} from '../data';
 import React, {Component} from 'react';
 import axios from 'axios';
+import { unstable_trace as trace } from "scheduler/tracing";
 
 // Provider and Consumer
 // any changes done to Context it notifies all Consumer
@@ -49,7 +50,7 @@ class ProductProvider extends Component {
         this.setState({
             cart: cartCopy
         });
-    }
+     }
 
     handleDetail = (id) => {
         axios.get('http://localhost:1234/products/' + id).then( response => {
