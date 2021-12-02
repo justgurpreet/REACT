@@ -1970,6 +1970,15 @@ Redux [ state mangement ] + Context [ read state from redux ans pass it to compo
 index.js pending
 
  
+npx create-react-app reduxmiddlewareexample
+
+
+reduxmiddlewareexample> npm i redux react-redux redux-thunk axios
+
+Asynchrouns ACTIONS with REDUX
+
+=============
+
 
 
 
