@@ -1979,7 +1979,123 @@ Asynchrouns ACTIONS with REDUX
 
 =============
 
+Redux Thunk and Saga are Redux Middlewares for Async actions:
+
+Thunk middleware for Redux. It allows writing functions with logic inside that can interact with a Redux store's dispatch and getState methods.
+
+Saga
+
+=======
+React Redux Hooks instead of mapStateToProps() and mapDispatchToProps() and connect()
+
+useSelector()
+ The selector is approximately equivalent to the mapStateToProps argument to connect conceptually
+
+
+useDispatch()
+This hook returns a reference to the dispatch function from the Redux store. You may use it to dispatch actions as needed.
+
+=======================
+
+
+Day 8
+
+
+React State Management
+
+Redux
+	1) Action {type: , payload: }
+
+	2) ActionCreators ==> functions which take data and return Action objects [ formating so that data is understood by Redux]
+
+	3) Reducer ==> takes state and action; copy state and mutate based on action type and return the state
+
+	4) Store ==> manages the state [ single store per application]
+
+	5) Root Reducer ==> combine reducers
+
+	6) compose(mapStateToProps, mapDispatchToProps) ==> view binding to redux
+		==> useSelector() and useDispatch() hooks from react-redux
+
+	7) Provider to link store to application
+
+
+---
+
+Redux can't perform chaining of async calls ==> use middleware [thunk, saga]
+
+Thunk is a small library of 60+ lines	
+	API call
+	based on return value he can dispatch other actions
+
+
+const store = createStore(userReducer, 
+  compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__()));
+
+----------
+
+Redux Saga
+
+
+Asynchronous
+ES6 generators make asynchronous flows easy to read, write, and test. 
+Sagas enable numerous approaches to tackling parallel execution, task concurrency, task racing, task cancellation, and more. 
+Keep total control over the flow of your code.
+
+ES6 generators:
+
+function* doTask() {
+	console.log("task 1");
+	console.log("task 2");
+	yield "first";
+
+	console.log("task 3");
+	console.log("task 4");
+	console.log("task 5");
+	yield "second";
+}
 
 
 
+let iter = doTask();
+
+iter.next(); {"value": "first", done:false}
+...
+...
+iter.next();
+
+mport {call, cancel, join, take, put} from "redux-saga/effects"
+
+function* saga() {
+  yield take(ACTION)              // Blocking: will wait for the action
+  yield call(ApiFn, ...args)      // Blocking: will wait for ApiFn (If ApiFn returns a Promise)
+  yield call(otherSaga, ...args)  // Blocking: will wait for otherSaga to terminate
+
+  yield put(...)                   // Non-Blocking: will dispatch within internal scheduler
+
+  const task = yield fork(otherSaga, ...args)  // Non-blocking: will not wait for otherSaga
+  yield cancel(task)                           // Non-blocking: will resume immediately
+  // or
+  yield join(task)                              // Blocking: will wait for the task to terminate
+}
+
+
+Methods of Redux Saga:
+
+takeEvery(ACTION_TYPE, fn);
+
+
+take(ACTION)
+The Generator is suspended until an action that matches pattern is dispatched.
+
+takeEvery(ACTION, saga, ...args)
+Spawns a saga on each action dispatched to the Store that matches pattern
+
+takeLatest(ACTION, saga, ...args)
+
+==========================
+
+npm i redux-saga
+
+===================
 
