@@ -1,7 +1,7 @@
 import { call, put, takeEvery, takeLatest, delay } from 'redux-saga/effects';
 import { FETCH_USERS_REQUEST, FETCH_USERS_SUCCESS, FETCH_USERS_FAILURE } from '../Actions';
 
-import { fetchUsersRequest, fetchUsersSuccess, fetchUsersFailure } from '../ActionCreators';
+import {  fetchUsersSuccess, fetchUsersFailure } from '../ActionCreators';
 
 import axios from 'axios';
 
@@ -11,8 +11,9 @@ function getUserApi() {
 
 function* fetchUsers() {
     try {
-        yield delay(5000);
+        yield delay(1000);
         const users = yield call(getUserApi);
+        console.log(users);
         yield put(fetchUsersSuccess(users));
     } catch (e) {
         yield put(fetchUsersFailure(e));
@@ -21,7 +22,7 @@ function* fetchUsers() {
 };
 
 function* userSaga() {
-    yield takeEvery(FETCH_USERS_REQUEST, fetchUsers);
+    yield takeLatest(FETCH_USERS_REQUEST, fetchUsers);
 }
 
 export default userSaga;

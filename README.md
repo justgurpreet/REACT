@@ -2099,3 +2099,167 @@ npm i redux-saga
 
 ===================
 
+
+
+MobX:
+		"mobx": "^6.3.8",
+    "mobx-react": "^7.2.1",
+
+
+@Observable
+class Count {
+
+or
+
+makeObservable(this
+
+
+================================
+
+NextJS and ServerSide Rendering
+
+npx create-next-app nextexample
+
+======================================
+
+ReactJS ==> Client Side Rendering  [ CSR ]
+
+Request ==> Blank HTML and with JS downloads in client machine [ Browser ] and executes in client machine to render
+
+Good for SPA
+
+---
+
+Issues:
+1) SEO
+	<head>
+		<meta ... />
+	</head>
+
+2) Client Heavy [ FCP core web vitals]
+
+3) can't be served from CDN
+
+====
+
+NextJs is a React application
+1) By default what you build is client side rendering
+
+2) Server Side Rendering  [SSR]
+	take data render on server and send generated HTML to client
+
+	export async function getServerSideProps() {
+		.. Make API calls axios.get(..) 
+		return {
+			props: data
+		}
+	}
+
+	function MyComponent({data}) {
+		return <div>
+
+		</div>
+	}
+
+ client makes a request ==> page is rendered on server and returns HTML [ WeatherReport, Dashboard]
+
+3) Static Site Generation [ SSG ]
+SSR but pages are build during build stage itself
+
+npm run build
+
+on server you have ready HTML pages served as static pages
+Good part ==> can place then CDN
+
+Incremental Staic Generation: {revalidate: seconds}
+
+export async function getStaticProps() {
+		.. Make API calls axios.get(..) 
+		return {
+			props: data
+		}
+}
+
+
+=======
+RESTful API
+
+http://localhost:port/api/hello
+
+pages/api/hello. serve JSON data
+
+http://localhost:port/api/products
+
+pages/api/products.js to serve JSON data
+
+
+=================
+Server side Routing
+
+"pages"
+
+http://localhost:port/
+
+index.js in "pages" folder
+
+import Head from 'next/head' ==> SEO
+
+<html>
+	<head>
+	</head>
+	<body>
+	</body>
+
+</html>
+
+
+http://localhost:port/products
+products.js in "pages" folder
+
+
+
+npm i axios
+
+===
+
+SSR
+
+==
+users/[id].js
+
+http://localhost:port/users/3
+http://localhost:port/users/4
+
+=======================
+
+
+Prefer Functional Component anytime over class Component
+
+ErrorBoundary ==> getDerivedStateForError componentDidCatch() < == No Hook
+
+HOC ==> Class Component
+
+extends Component < == overhead 
+
+===
+
+class MyApiService {
+	constructor(api) {
+
+	}
+
+	getUsers() {
+
+	}
+}
+
+function MyApiService(api) {
+
+}
+
+MyApiService.prototype.getUser = function() {
+
+}
+
+
+======
